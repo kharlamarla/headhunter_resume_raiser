@@ -27,7 +27,7 @@
     ```
 4. Разместить на своём сервере можно:
     ```shell
-   docker save <image_id> | bzip2 | pv | ssh user@host docker load
+   docker save <image> | bzip2 | pv | ssh user@host docker load
    ```
 
 **Special thanks:**
