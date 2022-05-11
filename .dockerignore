@@ -1,0 +1,6 @@
+/app/.env
+/app/Dockerfile
+/app/.env.dev
+/README.md
+.gitignore
+.idea
