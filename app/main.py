@@ -49,10 +49,11 @@ url: str = "https://hh.ru/account/login"
 
 
 def sleep(
-    default_delay: float = 1.0,
+    delay: float = 1.0,
     jitter: tuple[float, float] = (0.1, 1.0),
 ):
-    delay: float = min(1.0, default_delay)
+    max_delay: float = 600.0
+    delay: float = min(delay, max_delay)
     delay += uniform(*jitter)
     return time.sleep(delay)
 
@@ -175,5 +176,5 @@ if __name__ == "__main__":
             )
         )
         log.info("Следующая попытка поднять резюме в поиске через ~4 часа")
-        sleep(14400.0, (20.0, 600.0))  # 60 * 60 * 4 == 4 hours
+        time.sleep(60 * 60 * 4 + uniform(20.0, 600.0))  # 60 * 60  * 4 == 4 hours
         log.info("Автоматическое поднятие резюме в поиске началось")
