@@ -132,6 +132,7 @@ def slap_resume(driver):
             title_selector = " > div > h3"
             raise_button_selector = " > div > " \
                                "div.applicant-resumes-recommendations > div.applicant-resumes-recommendations-buttons > div:nth-child(1)"
+            raise_button_selector_2 = " > div > div.bloko-gap.bloko-gap_top > div > div > div > div:nth-child(1)"
             assert_text = "Поднять в поиске"
             # fmt: on
             try:
@@ -143,13 +144,22 @@ def slap_resume(driver):
                     value=selector_base + raise_button_selector,
                 )
                 if resume_raise_button.text == assert_text:
-                    log.info("Резюме '%s' поднято в поиске", resume_title)
                     resume_raise_button.click()
+                    log.info("Резюме '%s' поднято в поиске", resume_title)
                     raised_resume += 1
                 else:
-                    log.info(
-                        "Резюме '%s' было поднято в поиске ранее", resume_title
+                    resume_raise_button = driver.find_element(
+                        by=By.CSS_SELECTOR,
+                        value=selector_base + raise_button_selector_2
                     )
+                    if resume_raise_button.text == assert_text:
+                        resume_raise_button.click()
+                        log.info("Резюме '%s' поднято в поиске", resume_title)
+                        raised_resume += 1
+                    else:
+                        log.info(
+                            "Резюме '%s' было поднято в поиске ранее", resume_title
+                        )
                 sleep()
             except NoSuchElementException:
                 if raised_resume:
