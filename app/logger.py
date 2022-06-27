@@ -102,13 +102,13 @@ class Logger:
 
         if only_console:
             return self.logger
-        
+
         if tg_logger:
             self.logger.addHandler(
                 self.__get_tg_handler(
                     token=tg_token,
                     chat_id=tg_chat_id,
-                    logger_level=logging.INFO
+                    logger_level=logging.INFO,
                 )
             )
         return self.logger

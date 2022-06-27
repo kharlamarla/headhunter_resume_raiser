@@ -1,11 +1,11 @@
 version: '3'
 services:
-  hh_resume_raiser:
+  hh_resume_raising:
     build:
       context: app
       dockerfile: Dockerfile
-    container_name: hh_resume_raiser
+    container_name: hh_resume_raising
     labels:
-      name: hh_resume_raiser
+      name: hh_resume_raising
     env_file:
       - app/.env

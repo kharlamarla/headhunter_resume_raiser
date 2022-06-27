@@ -24,8 +24,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.remote import webelement
 from webdriver_manager.chrome import ChromeDriverManager
 
-from app.logger import Logger
-from app.settings import get_env, Settings
+from logger import Logger
+from settings import get_env, Settings
 
 
 @dataclass(frozen=True, kw_only=True, slots=True)
@@ -259,7 +259,8 @@ class ResumeRaising:
         try:
             self.driver.find_element(
                 # by=By.CSS_SELECTOR, value=page_elements.resumes.CSS_SELECTOR
-                by=By.XPATH, value=page_elements.resumes.XPATH
+                by=By.XPATH,
+                value=page_elements.resumes.XPATH,
             ).click()
         except NoSuchElementException:
             self.login()
@@ -288,24 +289,20 @@ class ResumeRaising:
             try:
                 if button.text != assert_text:
                     log.info(
-                        "● Резюме '*%s*' было поднято ранее",
-                        title.text
+                        "● Резюме «*%s*» было поднято ранее\n", title.text
                     )
                     continue
 
                 button.click()
                 try:
-                    log.info(
-                        "● Резюме '*%s*' поднято",
-                        title.text
-                    )
+                    log.info("● Резюме «*%s*» поднято\n", title.text)
                     raised_resume += 1
                 except AttributeError:
                     log.debug(title, button)
-                    
+
             except ElementClickInterceptedException:
                 log.info(
-                    "● Резюме '*%s*' было поднято ранее",
+                    "● Резюме «*%s*» было поднято ранее\n",
                     title,
                 )
             except StaleElementReferenceException:
@@ -315,12 +312,12 @@ class ResumeRaising:
         else:
             if raised_resume:
                 log.info(
-                    "\nОбновление завершено, в поиске поднято %s резюме",
+                    "\n\nОбновление завершено, в поиске поднято %s резюме",
                     raised_resume,
                 )
             else:
                 log.info(
-                    "\nОбновление завершено, Нет возможных резюме для "
+                    "\n\nОбновление завершено, Нет возможных резюме для "
                     "обновления"
                 )
         return self
@@ -343,11 +340,5 @@ if __name__ == "__main__":
                 username=settings.HH_EMAIL_LOGIN.get_secret_value(),
                 password=settings.HH_PASSWORD.get_secret_value(),
             )
-        
-        rr.open_resumes().save_cookies().raise_resume()
 
-        # log.info("Следующая попытка поднять резюме в поиске через ~4 часа")
-        # time.sleep(
-        #     60 * 60 * 4 + uniform(20.0, 600.0)
-        # )  # 60 * 60  * 4 == 4 hours
-        # log.info("Автоматическое поднятие резюме в поиске началось")
+        rr.open_resumes().save_cookies().raise_resume()
