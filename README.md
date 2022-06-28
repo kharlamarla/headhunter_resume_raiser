@@ -97,10 +97,10 @@ Raise your resume on [HeadHunter](https://hh.ru/) :see_no_evil:
      [Timer]
      Unit=hh_resume_raising.service
      AccuracySec=900sec
-     OnCalendar=*-*-* 07:30:00
-     OnCalendar=*-*-* 10:45:00
-     OnCalendar=*-*-* 15:50:00
-     OnCalendar=*-*-* 19:15:00
+     OnCalendar=*-*-* 07:05:00
+     OnCalendar=*-*-* 11:20:00
+     OnCalendar=*-*-* 15:35:00
+     OnCalendar=*-*-* 19:50:00
      # OnCalendar=*-*-* 23:30:00
      Persistent=true
    
