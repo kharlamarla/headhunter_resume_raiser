@@ -12,7 +12,7 @@ Raise your resume on [HeadHunter](https://hh.ru/) :see_no_evil:
    
     В `app/settings.py` в классе `Settings` изменить 
    `telegram_logging` на `True`<br>
-   _(Может работать некорректно, но со своей задачей справляется)_<br><br>
+   _(Может работать некорректно, но со своей задачей справляется)_
 
 2. **Переименовать `.env.dev` в `.env` и заполнить значения**:
    - `HH_EMAIL_LOGIN` - Логин (email или телефон)
@@ -23,14 +23,11 @@ Raise your resume on [HeadHunter](https://hh.ru/) :see_no_evil:
      [@BotFather](https://t.me/botfather))
    - `TG_CHAT_ID` - Ваш Telegram ID (узнать - [@username_to_id_bot](https://t.me/username_to_id_bot))
 
-   <br>
 3. **Собираем контейнер с помощью `Docker-compose`**:
     ```shell
    docker-compose -f {path}/docker-compose.yaml up -d
     ```
-    <br>
 4. **Настроим автоматический запуск Docker контейнера с помощью `systemd service`**:
-<br><br>
    - Создадим конфигурационный файл ([docs](https://docs.fedoraproject.org/en-US/quick-docs/understanding-and-administering-systemd/index.html)):
    
      ```shell
