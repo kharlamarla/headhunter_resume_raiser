@@ -22,22 +22,17 @@ Raise your resume on [HeadHunter](https://hh.ru/) :see_no_evil:
    - `TG_API_KEY` - Токен к боту для уведомлений (создать - 
      [@BotFather](https://t.me/botfather))
    - `TG_CHAT_ID` - Ваш Telegram ID (узнать - [@username_to_id_bot](https://t.me/username_to_id_bot))
-   <br><br>
+
+   <br>
 3. **Собираем контейнер с помощью `Docker-compose`**:
     ```shell
    docker-compose -f {path}/docker-compose.yaml up -d
     ```
+    <br>
+4. **Настроим автоматический запуск Docker контейнера с помощью `systemd service`**:
+<br><br>
+   - Создадим конфигурационный файл ([docs](https://docs.fedoraproject.org/en-US/quick-docs/understanding-and-administering-systemd/index.html)):
    
-4. **После сборки и первого запуска контейнера ищем его `container ID`**:
-   ```shell
-   docker ps -a -q -f name=hh_resume_raising
-   ```
-   
-5. **Настроим автоматический запуск Docker контейнера с помощью `systemd 
-   service`**:
-   <br><br>
-   - Создадим конфигурационный файл ([docs](https://docs.fedoraproject.
-   org/en-US/quick-docs/understanding-and-administering-systemd/index.html)):<br>
      ```shell
      nano /etc/systemd/system/hh_resume_raising.service
      ```
@@ -90,13 +85,13 @@ Raise your resume on [HeadHunter](https://hh.ru/) :see_no_evil:
      Deactivated 
      successfully.
      ```
-   - Создадим таймер для запуска службы по "расписанию". В разделе `Timer` вы 
-     можете изменить желаемые интервалы обновлений (при изменении важно 
-     знать, что запуск может происходить в интервале 15 минут):
+   - Создадим таймер для запуска службы по "расписанию":
      ```shell
      nano /etc/systemd/system/hh_resume_raising.timer
      ```
-   - Копируем и сохраняем:
+   - Копируем и сохраняем. В разделе `Timer` вы 
+     можете изменить желаемые интервалы обновлений (при изменении важно 
+     знать, что запуск будет происходить в интервале до +15 минут):
      ```shell
      [Unit]
      Description=HeadHunter Resume Raising Container
